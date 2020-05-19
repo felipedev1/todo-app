@@ -57,13 +57,18 @@ export default function Todo() {
       .then(res => refresh(description))
   }
 
+  const handleClear = () => {
+    refresh()
+  }
+
   return (
     <div>
       <PageHeader name="Tarefas" small="Cadastro" />
       <TodoForm description={description}
         handleAdd={handleAdd}
         handleChange={handleChange}
-        handleSearch={handleSearch} />
+        handleSearch={handleSearch}
+        handleClear={handleClear} />
       <TodoList list={list} 
         handleRemove={handleRemove}
         handleMarkAsDone={handleMarkAsDone}

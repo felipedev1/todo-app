@@ -19,6 +19,8 @@ export default function TodoForm(props) {
           onClick={props.handleAdd} />
         <IconButton color="info" icon="search" 
           onClick={props.handleSearch} />
+        <IconButton color="default" icon="close" 
+          onClick={props.handleClear} />
       </Grid>
     </div>
   )
