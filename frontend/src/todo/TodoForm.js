@@ -9,11 +9,14 @@ export default function TodoForm(props) {
       {/* <div className="col-xs-12 col-sm-9 col-md-10"> */}
       <Grid cols="12 9 10">
         <input id="description" type="text" className="form-control"
-          placeholder="Adicione uma tarefa" />
+          placeholder="Adicione uma tarefa"
+          value={props.description}
+          onChange={props.handleChange} />
       </Grid>
 
       <Grid cols="12 3 2">
-        <IconButton style="primary" icon="plus" />
+        <IconButton style="primary" icon="plus" 
+          onClick={props.handleAdd} />
       </Grid>
     </div>
   )
