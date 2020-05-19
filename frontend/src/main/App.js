@@ -1,17 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import React from 'react';
-import './App.css';
-import Todo from './todo/Todo'
-import About from './about/About'
-import Menu from './template/Menu'
+import { HashRouter } from 'react-router-dom'
+import Menu from '../template/Menu'
+import Routes from './routes'
 
 function App() {
   return (
     <div className="container">
-      <Menu />
-      <Todo />
-      <About />
+      <HashRouter>
+        <Menu />
+        <Routes />
+      </HashRouter>
     </div>
   );
 }
