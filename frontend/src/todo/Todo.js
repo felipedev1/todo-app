@@ -24,15 +24,30 @@ export default function Todo() {
   }
 
   const refresh = () => {
-    axios.get(`${URL}?sort=createdAt`)
+    const config = {
+      params: {
+        sort: 'createdAt'
+      }
+    }
+    axios.get(URL, config)
       .then(res => {
       setDescription('')
       setList(res.data)
     })
   }
 
-  const handleRemove = (id) => {
-    axios.delete(`${URL}/${id}`)
+  const handleRemove = (todo) => {
+    axios.delete(`${URL}/${todo._id}`)
+      .then(res => refresh())
+  }
+
+  const handleMarkAsDone = (todo) => {
+    axios.put(`${URL}/${todo._id}`, { ...todo, done: true })
+      .then(res => refresh())
+  }
+
+  const handleMarkAsPending = (todo) => {
+    axios.put(`${URL}/${todo._id}`, { ...todo, done: false })
       .then(res => refresh())
   }
 
@@ -42,7 +57,10 @@ export default function Todo() {
       <TodoForm description={description}
         handleAdd={handleAdd}
         handleChange={handleChange} />
-      <TodoList list={list} handleRemove={handleRemove} />
+      <TodoList list={list} 
+        handleRemove={handleRemove}
+        handleMarkAsDone={handleMarkAsDone}
+        handleMarkAsPending={handleMarkAsPending} />
     </div>
   )
 }

@@ -7,10 +7,16 @@ export default function TodoList(props) {
     return props.list.map(todo => {
         return (
           <tr key={todo._id}>
-            <td>{todo.description}</td>
+            <td className={todo.done ? 'markedAsDone' : ''}>
+              {todo.description}
+            </td>
             <td>
-              <IconButton color="danger" icon="trash-o" 
-                onClick={() => props.handleRemove(todo._id)} />
+              <IconButton hide={todo.done} color="success" icon="check" 
+                onClick={() => props.handleMarkAsDone(todo)} />
+              <IconButton hide={!todo.done} color="warning" icon="undo"
+                onClick={() => props.handleMarkAsPending(todo)} />
+              <IconButton hide={!todo.done} color="danger" icon="trash-o" 
+                onClick={() => props.handleRemove(todo)} />
             </td>
           </tr>
         )
