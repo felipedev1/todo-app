@@ -1,9 +1,10 @@
 import React from 'react'
+import PageHeader from '../template/PageHeader'
 
 export default function Todo() {
   return (
     <div>
-      <h1>TODO</h1>
+      <PageHeader name="Tarefas" small="Cadastro" />
     </div>
   )
 }
