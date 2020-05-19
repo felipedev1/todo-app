@@ -3,6 +3,15 @@ import Grid from '../template/Grid'
 import IconButton from '../template/IconButton'
 
 export default function TodoForm(props) {
+
+  const keyHandler = (e) => {
+    if(e.key === 'Enter'){
+      e.shiftKey ? props.handleSearch() : props.handleAdd()
+    } else if(e.key === 'Escape') {
+      props.handleClear()
+    }
+  }
+
   return (
     <div role="form" className="todo-form">
 
@@ -11,6 +20,7 @@ export default function TodoForm(props) {
         <input id="description" type="text" className="form-control"
           placeholder="Adicione uma tarefa"
           value={props.description}
+          onKeyUp={keyHandler}
           onChange={props.handleChange} />
       </Grid>
 
