@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 function TodoList(props) {
 
   const renderRows = () => {
-    return props.list.map(todo => {
+    const list = props.list || []
+    return list.map(todo => {
         return (
           <tr key={todo._id}>
             <td className={todo.done ? 'markedAsDone' : ''}>

@@ -1,11 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Grid from '../template/Grid'
 import IconButton from '../template/IconButton'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { changeDescription } from '../store/actions/todoActions'
+import { changeDescription, search } from '../store/actions/todoActions'
 
 function TodoForm(props) {
+
+  useEffect(() => {
+    props.search()
+  })
 
   const keyHandler = (e) => {
     if(e.key === 'Enter'){
@@ -46,7 +50,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({changeDescription}, dispatch)
+  return bindActionCreators({changeDescription, search}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)
