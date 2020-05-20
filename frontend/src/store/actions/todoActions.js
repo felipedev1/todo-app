@@ -23,10 +23,10 @@ export function search(){
   }
 }
 
-export function add(description){
-  const request = axios.post(URL, { description })
-  return [
-    { type: 'TODO_ADDED', payload: request },
-    search()
-  ]
+export function add(description) {
+  return function(dispatch){
+    axios.post(URL, { description })
+      .then(res => dispatch({ type: 'TODO_ADDED', payload: res.data}))
+      .then(res => dispatch(search()))
+  }
 }
