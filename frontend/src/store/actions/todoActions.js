@@ -22,3 +22,11 @@ export function search(){
     payload: request
   }
 }
+
+export function add(description){
+  const request = axios.post(URL, { description })
+  return {
+    type: 'TODO_ADDED',
+    payload: request
+  }
+}

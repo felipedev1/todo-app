@@ -9,6 +9,8 @@ export function todoReducer(store = initialState, action){
       return { ...store, description: action.payload }
     case 'TODO_SEARCHED':
       return { ...store, list: action.payload.data}
+    case 'TODO_ADDED':
+      return { ...store, description: ''}
     default:
       return store
   }

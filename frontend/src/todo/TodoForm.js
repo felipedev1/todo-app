@@ -3,17 +3,18 @@ import Grid from '../template/Grid'
 import IconButton from '../template/IconButton'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { changeDescription, search } from '../store/actions/todoActions'
+import { changeDescription, search, add } from '../store/actions/todoActions'
 
 function TodoForm(props) {
+  const { search, add, description, changeDescription } = props
 
   useEffect(() => {
-    props.search()
-  })
+    search()
+  }, [])
 
   const keyHandler = (e) => {
     if(e.key === 'Enter'){
-      e.shiftKey ? props.handleSearch() : props.handleAdd()
+      e.shiftKey ? search() : add(description)
     } else if(e.key === 'Escape') {
       props.handleClear()
     }
@@ -26,16 +27,16 @@ function TodoForm(props) {
       <Grid cols="12 9 10">
         <input id="description" type="text" className="form-control"
           placeholder="Adicione uma tarefa"
-          value={props.description}
+          value={description}
           onKeyUp={keyHandler}
-          onChange={props.changeDescription} />
+          onChange={changeDescription} />
       </Grid>
 
       <Grid cols="12 3 2">
         <IconButton color="primary" icon="plus" 
-          onClick={props.handleAdd} />
+          onClick={() => add(description)} />
         <IconButton color="info" icon="search" 
-          onClick={props.handleSearch} />
+          onClick={() => search()} />
         <IconButton color="default" icon="close" 
           onClick={props.handleClear} />
       </Grid>
@@ -50,7 +51,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({changeDescription, search}, dispatch)
+  return bindActionCreators({changeDescription, search, add}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)
