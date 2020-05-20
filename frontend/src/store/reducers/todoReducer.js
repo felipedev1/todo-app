@@ -20,5 +20,11 @@ const initialState = {
 }
 
 export function todoReducer(store = initialState, action){
-  return store
+  switch (action.type) {
+    case 'DESCRIPTION_CHANGED':
+      return { ...store, description: action.payload }
+  
+    default:
+      return store
+  }
 }
