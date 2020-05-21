@@ -30,3 +30,17 @@ export function add(description) {
       .then(res => dispatch(search()))
   }
 }
+
+export function markAsDone(todo) {
+  return function(dispatch) {
+    axios.put(`${URL}/${todo._id}`, { ...todo, done: true})
+      .then(res => dispatch(search()))
+  }
+}
+
+export function markAsPending(todo) {
+  return function(dispatch) {
+    axios.put(`${URL}/${todo._id}`, { ...todo, done: false})
+      .then(res => dispatch(search()))
+  }
+}
