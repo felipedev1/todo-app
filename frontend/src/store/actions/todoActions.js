@@ -44,3 +44,10 @@ export function markAsPending(todo) {
       .then(res => dispatch(search()))
   }
 }
+
+export function remove(todo){
+  return function(dispatch) {
+    axios.delete(`${URL}/${todo._id}`)
+      .then(res => dispatch(search()))
+  }
+}
