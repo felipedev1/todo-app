@@ -11,15 +11,16 @@ export function changeDescription(event){
 }
 
 export function search(){
-  const config = {
-    params: {
-      sort: 'createdAt'
+  return function(dispatch, getState){
+    const description = getState().todo.description
+    const config = {
+      params: {
+        sort: 'createdAt',
+        description__regex: description ? `/${description}/i` : null
+      }
     }
-  }
-  const request = axios.get(URL, config)
-  return {
-    type: 'TODO_SEARCHED',
-    payload: request
+    axios.get(URL, config)
+      .then(res => dispatch({type: 'TODO_SEARCHED', payload: res.data}))
   }
 }
 
@@ -53,7 +54,8 @@ export function remove(todo){
 }
 
 export function clear(){
-  return {
-    type: 'TODO_CLEAR'
-  }
+  return [
+    { type: 'TODO_CLEAR' },
+    search()
+  ]
 }
