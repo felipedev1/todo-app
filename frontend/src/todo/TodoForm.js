@@ -3,10 +3,10 @@ import Grid from '../template/Grid'
 import IconButton from '../template/IconButton'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { changeDescription, search, add } from '../store/actions/todoActions'
+import { changeDescription, search, add, clear } from '../store/actions/todoActions'
 
 function TodoForm(props) {
-  const { search, add, description, changeDescription } = props
+  const { search, add, clear, description, changeDescription } = props
 
   useEffect(() => {
     search()
@@ -16,7 +16,7 @@ function TodoForm(props) {
     if(e.key === 'Enter'){
       e.shiftKey ? search() : add(description)
     } else if(e.key === 'Escape') {
-      props.handleClear()
+      clear()
     }
   }
 
@@ -38,7 +38,7 @@ function TodoForm(props) {
         <IconButton color="info" icon="search" 
           onClick={() => search()} />
         <IconButton color="default" icon="close" 
-          onClick={props.handleClear} />
+          onClick={() => clear()} />
       </Grid>
     </div>
   )
@@ -51,7 +51,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({changeDescription, search, add}, dispatch)
+  return bindActionCreators({changeDescription, search, add, clear}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)

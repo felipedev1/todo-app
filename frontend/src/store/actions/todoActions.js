@@ -26,7 +26,7 @@ export function search(){
 export function add(description) {
   return function(dispatch){
     axios.post(URL, { description })
-      .then(res => dispatch({ type: 'TODO_ADDED', payload: res.data}))
+      .then(res => dispatch(clear()))
       .then(res => dispatch(search()))
   }
 }
@@ -49,5 +49,11 @@ export function remove(todo){
   return function(dispatch) {
     axios.delete(`${URL}/${todo._id}`)
       .then(res => dispatch(search()))
+  }
+}
+
+export function clear(){
+  return {
+    type: 'TODO_CLEAR'
   }
 }
