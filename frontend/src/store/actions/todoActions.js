@@ -28,7 +28,6 @@ export function add(description) {
   return function(dispatch){
     axios.post(URL, { description })
       .then(res => dispatch(clear()))
-      .then(res => dispatch(search()))
   }
 }
 
